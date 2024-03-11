@@ -1,0 +1,158 @@
+{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "installDir": "${sourceDir}/out/install/${presetName}",
+            "cacheVariables": {
+                "CMAKE_VERBOSE_MAKEFILE": "ON"
+            }
+        },
+        {
+            "name": "x64",
+            "hidden": true,
+            "inherits": "base",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            }
+        },
+        {
+            "name": "x64-windows",
+            "hidden": true,
+            "inherits": "x64",
+            "toolset": {
+                "value": "v143,host=x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "cl",
+                "CMAKE_C_COMPILER": "cl"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": ["Windows"],
+                    "intelliSenseMode": "windows-msvc-x64"
+                }
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "x64-windows-dbg",
+            "displayName": "Debug",
+            "inherits": "x64-windows",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "x64-windows-rel",
+            "displayName": "Release",
+            "inherits": "x64-windows",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "x64-windows-rdi",
+            "displayName": "Release with Debug info",
+            "inherits": "x64-windows",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        },
+        {
+            "name": "x64-linux",
+            "hidden": true,
+            "inherits": "x64",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_C_COMPILER": "gcc"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": ["Linux"],
+                    "intelliSenseMode": "linux-gcc-x64"
+                }
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        },
+        {
+            "name": "x64-linux-dbg",
+            "displayName": "Debug",
+            "inherits": "x64-linux",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "x64-linux-rel",
+            "displayName": "Release",
+            "inherits": "x64-linux",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "x64-linux-rdi",
+            "displayName": "Release with Debug info",
+            "inherits": "x64-linux",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "targets",
+            "targets": ["cmake"]
+        },
+        {
+            "name": "x64-windows-dbg-all",
+            "displayName": "All",
+            "configurePreset": "x64-windows-dbg",
+            "inherits": "targets"
+        },
+        {
+            "name": "x64-windows-rel-all",
+            "displayName": "All",
+            "configurePreset": "x64-windows-rel",
+            "inherits": "targets"
+        },
+        {
+            "name": "x64-windows-rdi-all",
+            "displayName": "All",
+            "configurePreset": "x64-windows-rdi",
+            "inherits": "targets"
+        },
+        {
+            "name": "x64-linux-dbg-all",
+            "displayName": "All",
+            "configurePreset": "x64-linux-dbg",
+            "inherits": "targets"
+        },
+        {
+            "name": "x64-linux-rel-all",
+            "displayName": "All",
+            "configurePreset": "x64-linux-rel",
+            "inherits": "targets"
+        },
+        {
+            "name": "x64-linux-rdi-all",
+            "displayName": "All",
+            "configurePreset": "x64-linux-rdi",
+            "inherits": "targets"
+        }
+    ]
+}
